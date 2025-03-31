@@ -24,6 +24,12 @@ def set_line_spacing(paragraph):
     spacing = parse_xml(r'<w:spacing w:line="360" w:lineRule="auto" %s />' % nsdecls('w'))
     p.get_or_add_pPr().append(spacing)
 
+# Function to set line spacing to 2.0
+def set_line_spacing1(paragraph):
+    p = paragraph._element
+    spacing = parse_xml(r'<w:spacing w:line="480" w:lineRule="auto" %s />' % nsdecls('w'))
+    p.get_or_add_pPr().append(spacing)
+
 # Function to fill project report
 def fill_project_report(details, template):
     doc = Document(template)  # Load the selected template file
@@ -59,7 +65,7 @@ def fill_project_report(details, template):
                 for run in para.runs:
                     run.font.name = "Times New Roman"
                     run.font.size = Pt(font_sizes.get(key, 14))
-        set_line_spacing(para)  # Apply 1.5 line spacing
+        set_line_spacing1(para)  # Apply 1.5 line spacing
         
         # Remove empty paragraphs on the first page
         if i < 10 and para.text.strip() == "":
@@ -77,6 +83,7 @@ def fill_project_report(details, template):
                             for run in para.runs:
                                 run.font.name = "Times New Roman"
                                 run.font.size = Pt(font_sizes.get(key, 14))
+                #set_line_spacing(para)
 
     # Save the modified document
     output = BytesIO()
@@ -84,32 +91,32 @@ def fill_project_report(details, template):
     return output
 
 # Streamlit UI
-st.title("KCET Project Report Generator")
+st.title("Project Report Generator")
 project_type = st.radio("Select Project Type", ["Internal Project", "External Project"])
 
 with st.form("project_form"):
-    project_name = st.text_input("Project Name [In CAPITAL LETTERS]", "")
-    student_1 = st.text_input("Student 1 Name [In CAPITAL LETTERS & initial at last, eg. KAMARAJ K]", "")
-    reg_no_1 = st.text_input("Register Number 1 [In bracket, eg. (92042210XXXX)]", "")
-    student_2 = st.text_input("Student 2 Name (Optional) [Initial at last, eg. KAMARAJ K]", "")
-    reg_no_2 = st.text_input("Register Number 2 (Optional) [In brackets, eg. (92042210XXXX)]", "")
-    student_3 = st.text_input("Student 3 Name (Optional) [Initial at last, eg. KAMARAJ K]", "")
-    reg_no_3 = st.text_input("Register Number 3 Optional [In brackets, eg. (92042210XXXX)]", "")
-    student_4 = st.text_input("Student 4 Name (Optional) [Initial at last, eg. KAMARAJ K]", "")
-    reg_no_4 = st.text_input("Register Number 4 (Optional) [In brackets, eg. (92042210XXXX)]", "")
-    degree = st.selectbox("Degree", ["BACHELOR OF ENGINEERING", "BACHELOR OF TECHNOLOGY", "MASTER OF ENGINEERING"])
-    department = st.selectbox("Department", ["COMPUTER SCIENCE AND ENGINEERING", "ARTIFICIAL INTELLIGENCE AND DATA SCIENCE", "INFORMATION TECHNOLOGY", "ELECTRONICS AND COMMUNICATION ENGINEERING","ELECTRICAL AND ELECTRONICS ENGINEERING","BIO-TECHNOLOGY", "MECHANICAL ENGINEERING","MECHATRONICS ENGINEERING", "CIVIL ENGINEERING", "COMMUNICATION & NETWORKING ENGINEERING", "POWER SYSTEMS ENGINEERING"])
-    hod_name = st.text_input("HoD Name [eg. Dr. K. Kamaraj]", "")
+    project_name = st.text_input("Project Name", "")
+    student_1 = st.text_input("Student 1 Name", "")
+    reg_no_1 = st.text_input("Register Number 1", "")
+    student_2 = st.text_input("Student 2 Name (Optional)", "")
+    reg_no_2 = st.text_input("Register Number 2 (Optional)", "")
+    student_3 = st.text_input("Student 3 Name (Optional)", "")
+    reg_no_3 = st.text_input("Register Number 3 (Optional)", "")
+    student_4 = st.text_input("Student 4 Name (Optional)", "")
+    reg_no_4 = st.text_input("Register Number 4 (Optional)", "")
+    degree = st.selectbox("Degree", ["BACHELOR OF ENGINEERING", "BACHELOR OF TECHNOLOGY"])
+    department = st.selectbox("Department", ["COMPUTER SCIENCE AND ENGINEERING", "ARTIFICIAL INTELLIGENCE AND DATA SCIENCE", "INFORMATION TECHNOLOGY", "ELECTRONICS AND COMMUNICATION ENGINEERING","ELECTRICAL AND ELECTRONICS ENGINEERING","BIO-TECHNOLOGY", "MECHANICAL ENGINEERING","MECHATRONICS ENGINEERING", "CIVIL ENGINEERING"])
+    hod_name = st.text_input("HoD Name", "")
     hod_gender = st.radio("HoD Gender", ["Male", "Female"])
-    supervisor_name = st.text_input("Supervisor Name [eg. Mr. K. Kamaraj]", "")
+    supervisor_name = st.text_input("Supervisor Name", "")
     supervisor_gender = st.radio("Supervisor Gender", ["Male", "Female"])
     supervisor_designation = st.selectbox("Supervisor Designation", ["Assistant Professor", "Associate Professor", "Professor"])
-    department_hod_supervisor = st.selectbox("Department of HoD & Supervisor", ["Computer Science and Engineering", "Artificial Intelligence and Data Science", "Information Technology", "Electronics and Communication Engineering","Electrical and Electronics Engineering","Bio-Technology", "Mechanical Engineering","Mechatronics Engineering", "Civil Engineering"])
+    department_hod_supervisor = st.selectbox("Department of HoD & Supervisor", ["Computer Science and Engineering", "Artificial Intelligence And Data Science", "Information Technology", "Electronics And Communication Engineering","Electrical And Electronics Engineering","Bio-Technology", "Mechanical Engineering","Mechatronics Engineering", "Civil Engineering"])
     
     if project_type == "External Project":
-        industry_name = st.text_input("Industry Name[eg. ABC Technologies Pvt. Ltd.]", "")
-        industry_person_name = st.text_input("Industry Person Name [eg. Mr. K. Kamaraj]", "")
-        industry_person_position = st.text_input("Industry Person Position [eg. General Manager]", "")
+        industry_name = st.text_input("Industry Name", "")
+        industry_person_name = st.text_input("Industry Person Name", "")
+        industry_person_position = st.text_input("Industry Person Position", "")
         industry_person_gender = st.radio("Industry Person Gender", ["Male", "Female"])
     
     submitted = st.form_submit_button("Generate Report")
