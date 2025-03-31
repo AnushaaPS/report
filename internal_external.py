@@ -84,7 +84,7 @@ def fill_project_report(details, template):
     return output
 
 # Streamlit UI
-st.title("Project Report Generator")
+st.title("KCET Project Report Generator")
 project_type = st.radio("Select Project Type", ["Internal Project", "External Project"])
 
 with st.form("project_form"):
