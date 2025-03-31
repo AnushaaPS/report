@@ -104,7 +104,7 @@ with st.form("project_form"):
     supervisor_name = st.text_input("Supervisor Name [eg. Mr. K. Kamaraj]", "")
     supervisor_gender = st.radio("Supervisor Gender", ["Male", "Female"])
     supervisor_designation = st.selectbox("Supervisor Designation", ["Assistant Professor", "Associate Professor", "Professor"])
-    department_hod_supervisor = st.selectbox("Department of HoD & Supervisor", ["Computer Science and Engineering", "Artificial Intelligence and Data Science", "Information Technology", "Electronics and Communication Engineering","Electrical And Electronics Engineering","Bio-Technology", "Mechanical Engineering","Mechatronics Engineering", "Civil Engineering"])
+    department_hod_supervisor = st.selectbox("Department of HoD & Supervisor", ["Computer Science and Engineering", "Artificial Intelligence and Data Science", "Information Technology", "Electronics and Communication Engineering","Electrical and Electronics Engineering","Bio-Technology", "Mechanical Engineering","Mechatronics Engineering", "Civil Engineering"])
     
     if project_type == "External Project":
         industry_name = st.text_input("Industry Name[eg. ABC Technologies Pvt. Ltd.]", "")
